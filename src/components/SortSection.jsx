@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { ShopContext } from "../ShopContext";
 import { FilterSortComp } from "./FilterSortComp";
+import { PriceSlider } from "./PriceSlider";
 
 export const SortSection = () => {
   const { categories, handleCatChange } = useContext(ShopContext);
@@ -28,6 +29,8 @@ export const SortSection = () => {
         label={"Sort by:"}
         listOfOptions={sortOptions}
       />
+
+      <PriceSlider />
     </div>
   );
 };

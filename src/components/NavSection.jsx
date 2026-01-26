@@ -1,9 +1,9 @@
 
 
-import SortSection from "./SortSection";
+import {SortSection} from "./SortSection";
 
  
-  const NavSection = () => {
+ export const NavSection = () => {
   return (
     <nav className="product-filter">
       <h1>Jackets</h1>
@@ -11,4 +11,3 @@ import SortSection from "./SortSection";
     </nav>
   );
 };
-export default NavSection;

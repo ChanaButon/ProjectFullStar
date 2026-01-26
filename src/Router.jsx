@@ -9,6 +9,10 @@ export const Router = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [cart, setCart] = useState([]);
+  const [price, setPrice] = useState(0);
+const [minPrice, setMinPrice] = useState(0);
+const [maxPrice, setMaxPrice] = useState(0);
+
 
   useEffect(() => {
     const handleProducts = async () => {
@@ -18,8 +22,16 @@ export const Router = () => {
       const mappedData = data.map((product) => {
         return { ...product, amount: 0 };
       });
+      
+      const prices = mappedData.map(p => p.price);
+      const min = Math.min(...prices);
+      const max = Math.max(...prices);
+
       setProducts(mappedData);
       setFilteredProducts(mappedData);
+      setMinPrice(min);
+      setMaxPrice(max);
+      setPrice(max);
     };
 
     handleProducts();
@@ -45,6 +57,14 @@ export const Router = () => {
       setFilteredProducts(products.filter((p) => p.category === category));
     }
   };
+
+  const handlePriceChange = (newPrice) => {
+  setPrice(newPrice);
+
+  setFilteredProducts(
+    products.filter(p => p.price <= newPrice)
+  );
+};
 
   // Add item to cart
   const addToCart = (productId) => {
@@ -107,6 +127,10 @@ export const Router = () => {
         cart,
         addToCart,
         removeFromCart,
+        handlePriceChange,
+        minPrice,
+        maxPrice,
+        price,
       }}
     >
       <RouterProvider router={router} />

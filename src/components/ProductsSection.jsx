@@ -1,10 +1,10 @@
 
-import ProductCard from "./ProductCard";
+import {ProductCard} from "./ProductCard";
 import { useContext } from "react";
 import { ShopContext } from "../ShopContext.js";
 import { Link } from "react-router-dom";
  
-const ProductsSection = () => {
+ export const ProductsSection = () => {
 
 const { products } = useContext(ShopContext);
   return (
@@ -26,4 +26,3 @@ const { products } = useContext(ShopContext);
     </section>
   );
 };
-export default ProductsSection;
