@@ -1,36 +1,25 @@
 import { useContext } from "react";
 import { ShopContext } from "../ShopContext";
 import { FilterSortComp } from "./FilterSortComp";
-import { PriceSlider } from "./PriceSlider";
 
 export const SortSection = () => {
-  const { categories, handleCatChange } = useContext(ShopContext);
+  const { categories, setCategoryFilter, setSortMethod } =
+    useContext(ShopContext);
 
-  const sortOptions = [
-    "Featured",
-    "Best Selling",
-    "Alphabetically, A-Z",
-    "Alphabetically, Z-A",
-    "Price, low to high",
-    "Price, high to low",
-    "Date, new to old",
-    "Date, old to new",
-  ];
+  const sortOptions = ["זול ליקר", "יקר לזול", "א-ת", "ת-א"];
 
   return (
     <div className="sort">
       <FilterSortComp
-        onSelect={handleCatChange}
+        onSelect={(val) => setCategoryFilter(val)}
         label={"Filter by:"}
         listOfOptions={categories}
       />
       <FilterSortComp
-        onSelect={() => console.log("not working yet")}
+        onSelect={(val) => setSortMethod(val)}
         label={"Sort by:"}
         listOfOptions={sortOptions}
       />
-
-      <PriceSlider />
     </div>
   );
 };

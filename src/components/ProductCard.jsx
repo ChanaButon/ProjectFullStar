@@ -1,17 +1,19 @@
 import { useContext } from "react";
 import { ShopContext } from "../ShopContext";
 import { useNavigate } from "react-router";
-
+import IconButton from "@mui/material/IconButton";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 export const ProductCard = (props) => {
   const { cart, addToCart, removeFromCart } = useContext(ShopContext);
   const navigate = useNavigate();
 
   // Find the item in cart to get its amount
-  const cartItem = cart.find((item) => item.id === props.id);
+  const cartItem = cart.find((item) => item._id === props._id);
   const amount = cartItem ? cartItem.amount : 0;
 
   const handleNavigateToProductPage = () => {
-    navigate(`/products/${props.id}`);
+    navigate(`/products/${props._id}`);
   };
 
   return (
@@ -19,11 +21,31 @@ export const ProductCard = (props) => {
       <div className="product-image" onClick={handleNavigateToProductPage}>
         <img src={props.img} />
       </div>
-      <button onClick={() => addToCart(props.id)}>+</button>
-      <span>{amount}</span>
-      <button disabled={amount === 0} onClick={() => removeFromCart(props.id)}>
-        -
-      </button>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "20px",
+        }}
+      >
+        <IconButton
+          onClick={() => removeFromCart(props._id)}
+          color="primary"
+          aria-label="add to shopping cart"
+          disabled={amount === 0}
+        >
+          <RemoveCircleIcon />
+        </IconButton>
+        <span>{amount}</span>
+        <IconButton
+          onClick={() => addToCart(props._id)}
+          color="primary"
+          aria-label="add to shopping cart"
+        >
+          <AddShoppingCartIcon />
+        </IconButton>
+      </div>
       <div className="product-info">
         <h5>{props.itemName}</h5>
         <h6>${props.price}</h6>

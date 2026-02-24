@@ -1,30 +1,44 @@
-import { useContext } from "react";
 import { Link, useParams } from "react-router";
-import { ShopContext } from "../ShopContext";
+import { useQuery } from "@tanstack/react-query";
+import { fetchSingleProduct } from "../api/products-functions";
 
 export const SingleProductPage = () => {
-  const { productId } = useParams();
-  const { products } = useContext(ShopContext);
+  const { product_id } = useParams();
 
-  console.log(productId, products);
+  const {
+    data: product,
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["product", product_id],
+    queryFn: () => fetchSingleProduct(product_id),
+    enabled: !!product_id,
+  });
 
-  const p = products.find((p) => p.id === +productId);
-  console.log(p.id, productId);
+  if (isLoading) return <div>Loading product details...</div>;
+  if (isError) return <div>Error: {error.message}</div>;
+  if (!product) return <div>No product found.</div>;
+
   return (
-    <>
-      <Link to={"/"}>HOMEPAGE</Link>
-      {Object.entries(products?.find((p) => p.id === +productId)).map(
-        (item) => {
-          if (typeof item[1] === "object") {
-            return <></>;
-          }
+    <div className="single-product-container">
+      <Link to={"/"}>← Back to Homepage</Link>
+
+      <div className="product-display">
+        <img
+          src={product.image}
+          alt={product.title}
+          style={{ w_idth: "200px" }}
+        />
+        {Object.entries(product).map(([key, value]) => {
+          if (typeof value === "object" || key === "image") return null;
           return (
-            <div className={"productPageDetails"}>
-              <p>{item[0]}:</p> <b>{item[1]}</b>
+            <div key={key} className="productPageDetails">
+              <p>{key}:</p> <b>{String(value)}</b>
             </div>
           );
-        }
-      )}
-    </>
+        })}
+      </div>
+    </div>
   );
 };

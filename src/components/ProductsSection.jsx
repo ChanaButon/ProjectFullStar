@@ -1,28 +1,22 @@
+import { ProductCard } from "./ProductCard";
+import { useProducts } from "../hooks/useProducts.js";
 
-import {ProductCard} from "./ProductCard";
-import { useContext } from "react";
-import { ShopContext } from "../ShopContext.js";
-import { Link } from "react-router-dom";
- 
- export const ProductsSection = () => {
+export const ProductsSection = () => {
+  const { data: products, isLoading, isError } = useProducts();
 
-const { products } = useContext(ShopContext);
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>Error loading products</div>;
+
   return (
     <section className="products">
       {products.map((product) => (
-        
-        <Link
-      key={product.id}
-      to={`/products/${product.id}`}
-      style={{ textDecoration: "none", color: "inherit" }}
-    >
-      <ProductCard
-        itemName={product.title}
-        price={product.price}
-        img={product.image}
-      />
-    </Link>
-  ))}
+        <ProductCard
+          key={product._id}
+          {...product}
+          itemName={product.title}
+          img={product.image}
+        />
+      ))}
     </section>
   );
 };

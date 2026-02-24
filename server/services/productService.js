@@ -5,8 +5,8 @@ export const getAllProducts = async () => {
   return await Product.find();
 };
 
-export const getProductById = async (id) => {
-  return await Product.findById(id);
+export const getProductBy_id = async (_id) => {
+  return await Product.findBy_id(_id);
 };
 
 export const createProduct = async (productData) => {
@@ -14,10 +14,10 @@ export const createProduct = async (productData) => {
   return await product.save();
 };
 
-export const updateProductById = async (id, data) => {
-  return await Product.findByIdAndUpdate(id, data, { new: true });
+export const updateProductBy_id = async (_id, data) => {
+  return await Product.findBy_idAndUpdate(_id, data, { new: true });
 };
 
-export const deleteProductById = async (id) => {
-  return await Product.findByIdAndDelete(id);
+export const deleteProductBy_id = async (_id) => {
+  return await Product.findBy_idAndDelete(_id);
 };

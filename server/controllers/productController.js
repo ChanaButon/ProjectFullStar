@@ -10,9 +10,9 @@ export const getAllProductsController = async (req, res) => {
   }
 };
 
-export const findProductByIdController = async (req, res) => {
+export const findProductBy_idController = async (req, res) => {
   try {
-    const product = await productService.getProductById(req.params.id);
+    const product = await productService.getProductBy_id(req.params._id);
 
     if (!product) {
       return res.status(404).json({ message: "Product not found" });
@@ -20,7 +20,7 @@ export const findProductByIdController = async (req, res) => {
 
     res.status(200).json(product);
   } catch (error) {
-    res.status(400).json({ message: "Invalid ID" });
+    res.status(400).json({ message: "Inval_id _id" });
   }
 };
 
@@ -35,8 +35,8 @@ export const createProductController = async (req, res) => {
 
 export const updateProductController = async (req, res) => {
   try {
-    const updated = await productService.updateProductById(
-      req.params.id,
+    const updated = await productService.updateProductBy_id(
+      req.params._id,
       req.body
     );
 
@@ -52,7 +52,7 @@ export const updateProductController = async (req, res) => {
 
 export const deleteProductController = async (req, res) => {
   try {
-    const deleted = await productService.deleteProductById(req.params.id);
+    const deleted = await productService.deleteProductBy_id(req.params._id);
 
     if (!deleted) {
       return res.status(404).json({ message: "Product not found" });
