@@ -4,11 +4,11 @@ import { useNavigate } from "react-router";
 import IconButton from "@mui/material/IconButton";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
+
 export const ProductCard = (props) => {
   const { cart, addToCart, removeFromCart } = useContext(ShopContext);
   const navigate = useNavigate();
 
-  // Find the item in cart to get its amount
   const cartItem = cart.find((item) => item._id === props._id);
   const amount = cartItem ? cartItem.amount : 0;
 
@@ -19,30 +19,14 @@ export const ProductCard = (props) => {
   return (
     <div className="product-card">
       <div className="product-image" onClick={handleNavigateToProductPage}>
-        <img src={props.img} />
+        <img src={props.img} alt={props.itemName} />
       </div>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          gap: "20px",
-        }}
-      >
-        <IconButton
-          onClick={() => removeFromCart(props._id)}
-          color="primary"
-          aria-label="add to shopping cart"
-          disabled={amount === 0}
-        >
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "20px" }}>
+        <IconButton onClick={() => removeFromCart(props._id)} color="primary" disabled={amount === 0}>
           <RemoveCircleIcon />
         </IconButton>
         <span>{amount}</span>
-        <IconButton
-          onClick={() => addToCart(props._id)}
-          color="primary"
-          aria-label="add to shopping cart"
-        >
+        <IconButton onClick={() => addToCart(props._id)} color="primary">
           <AddShoppingCartIcon />
         </IconButton>
       </div>

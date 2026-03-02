@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useMemo } from "react";
 import Box from "@mui/material/Box";
-import Sl_ider from "@mui/material/Sl_ider";
+import Slider from "@mui/material/Slider";
 import Typography from "@mui/material/Typography";
 import { ShopContext } from "../ShopContext";
 import { useQuery } from "@tanstack/react-query";
-export const PriceSl_ider = () => {
+export const PriceSlider = () => {
   const { data: allProducts = [] } = useQuery({ queryKey: ["all-products"] });
   const { priceRange, setPriceRange } = useContext(ShopContext);
 
@@ -31,11 +31,11 @@ export const PriceSl_ider = () => {
   };
 
   return (
-    <Box sx={{ w_idth: 250, px: 2 }}>
+    <Box sx={{ width: 250, px: 2 }}>
       <Typography gutterBottom sx={{ fontSize: "0.8rem", color: "gray" }}>
         Price Range: ${priceRange[0]} - ${priceRange[1]}
       </Typography>
-      <Sl_ider
+      <Slider
         value={priceRange}
         onChange={handleChange}
         valueLabelDisplay="auto"
@@ -44,7 +44,7 @@ export const PriceSl_ider = () => {
         max={maxLimit}
         sx={{
           color: "primary.main",
-          "& .MuiSl_ider-thumb": { borderRadius: "4px" },
+          "& .MuiSlider-thumb": { borderRadius: "4px" },
         }}
       />
     </Box>

@@ -1,8 +1,8 @@
 import * as productService from "../services/productService.js";
 
+/* GET ALL */
 export const getAllProductsController = async (req, res) => {
   try {
-    
     const products = await productService.getAllProducts();
     res.status(200).json(products);
   } catch (error) {
@@ -10,9 +10,10 @@ export const getAllProductsController = async (req, res) => {
   }
 };
 
-export const findProductBy_idController = async (req, res) => {
+/* GET BY ID */
+export const findProductByidController = async (req, res) => {
   try {
-    const product = await productService.getProductBy_id(req.params._id);
+    const product = await productService.getProductByid(req.params.id);
 
     if (!product) {
       return res.status(404).json({ message: "Product not found" });
@@ -20,10 +21,11 @@ export const findProductBy_idController = async (req, res) => {
 
     res.status(200).json(product);
   } catch (error) {
-    res.status(400).json({ message: "Inval_id _id" });
+    res.status(400).json({ message: "Invalid id" });
   }
 };
 
+/* POST */
 export const createProductController = async (req, res) => {
   try {
     const newProduct = await productService.createProduct(req.body);
@@ -33,10 +35,11 @@ export const createProductController = async (req, res) => {
   }
 };
 
+/* PUT */
 export const updateProductController = async (req, res) => {
   try {
-    const updated = await productService.updateProductBy_id(
-      req.params._id,
+    const updated = await productService.updateProductByid(
+      req.params.id,
       req.body
     );
 
@@ -50,9 +53,10 @@ export const updateProductController = async (req, res) => {
   }
 };
 
+/* DELETE */
 export const deleteProductController = async (req, res) => {
   try {
-    const deleted = await productService.deleteProductBy_id(req.params._id);
+    const deleted = await productService.deleteProductByid(req.params.id);
 
     if (!deleted) {
       return res.status(404).json({ message: "Product not found" });

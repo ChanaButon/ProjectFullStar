@@ -1,13 +1,11 @@
-import { createBrowserRouter, RouterProv_ider } from "react-router";
+import { createBrowserRouter, RouterProvider } from "react-router";
 import App from "./App";
 import { SingleProductPage } from "./pages/SingleProductPage";
+import { AdminPage } from "./pages/AdminPage";
 import { useState } from "react";
 import { ShopContext } from "./ShopContext";
 import { useQuery } from "@tanstack/react-query";
-import TanstackProv_ider from "./QueryClientProv_ider";
 import { handleProducts } from "./api/products-functions";
-import { useProducts } from "./hooks/useProducts";
-import { AdminPage } from "./pages/AdminPage";
 
 export const Router = () => {
   const [cart, setCart] = useState([]);
@@ -21,55 +19,43 @@ export const Router = () => {
     queryFn: handleProducts,
   });
 
-  const categories = [
-    "All Items",
-    ...new Set(allProducts.map((p) => p.category)),
-  ];
+  const categories = ["All Items", ...new Set(allProducts.map((p) => p.category))];
 
-  const addToCart = (product_id) => {
-    const product = allProducts.find((p) => p.__id === product_id);
+  // ====== ADD TO CART ======
+  const addToCart = (productid) => {
+    const product = allProducts.find((p) => p._id === productid);
     if (!product) return;
 
     setCart((prev) => {
-      const existing = prev.find((item) => item._id === product_id);
+      const existing = prev.find((item) => item._id === productid);
       if (existing) {
         return prev.map((item) =>
-          item.__id === product_id ? { ...item, amount: item.amount + 1 } : item,
+          item._id === productid ? { ...item, amount: item.amount + 1 } : item
         );
       }
       return [...prev, { ...product, amount: 1 }];
     });
   };
 
-  const removeFromCart = (product_id) => {
+  // ====== REMOVE FROM CART ======
+  const removeFromCart = (productid) => {
     setCart((prev) =>
       prev
         .map((item) =>
-          item.__id === product_id ? { ...item, amount: item.amount - 1 } : item,
+          item._id === productid ? { ...item, amount: item.amount - 1 } : item
         )
-        .filter((item) => item.amount > 0),
+        .filter((item) => item.amount > 0)
     );
   };
 
   const router = createBrowserRouter([
-    {
-      path: "/",
-      Component: App,
-    },
-    {
-      path: "/products/:product_id",
-      Component: SingleProductPage,
-    },
-    {
-    path: "/admin",
-    Component: AdminPage,
-    },
-
-
+    { path: "/", Component: App },
+    { path: "/products/:productid", Component: SingleProductPage },
+    { path: "/admin", Component: AdminPage },
   ]);
 
   return (
-    <ShopContext.Prov_ider
+    <ShopContext.Provider
       value={{
         categories,
         categoryFilter,
@@ -85,7 +71,7 @@ export const Router = () => {
         setIsCartOpen,
       }}
     >
-      <RouterProv_ider router={router} />
-    </ShopContext.Prov_ider>
+      <RouterProvider router={router} />
+    </ShopContext.Provider>
   );
 };

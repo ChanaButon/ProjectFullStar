@@ -17,7 +17,7 @@ export const transformProducts = (
   });
 
   // 2. Sort the filtered results
-  // We spread into a new array [...] to avo_id mutating the original cached data
+  // We spread into a new array [...] to avoid mutating the original cached data
   return [...filtered].sort((a, b) => {
     switch (sortMethod) {
       case "זול ליקר":

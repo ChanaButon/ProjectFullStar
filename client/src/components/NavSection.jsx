@@ -1,10 +1,13 @@
 import { useContext } from "react";
-import { PriceSl_ider } from "./Sl_ider";
+import { PriceSlider } from "./Slider";
 import { SortSection } from "./SortSection";
 import { ShopContext } from "../ShopContext";
 import { CartDrawer } from "./CartDrawer";
 import { Badge, IconButton } from "@mui/material";
+import Button from "@mui/material/Button";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { Link } from "react-router";
+
 export const NavSection = () => {
   const { setIsCartOpen, cart } = useContext(ShopContext);
   const totalItems = cart.reduce((acc, item) => acc + item.amount, 0);
@@ -13,7 +16,16 @@ export const NavSection = () => {
       <h1>Jackets</h1>
       <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
         <SortSection />
-        <PriceSl_ider />
+        <PriceSlider />
+        <Button
+          component={Link}
+          to="/admin"
+          variant="contained"
+          color="secondary"
+        >
+          Admin
+        </Button>
+
 
         {/* Cart Button */}
         <IconButton onClick={() => setIsCartOpen(true)} color="primary">

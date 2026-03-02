@@ -28,7 +28,7 @@ const ProductModal = ({ open, onClose, onSubmit, product }) => {
   }, [product, reset]);
 
   return (
-    <Dialog open={open} onClose={onClose} fullW_idth>
+    <Dialog open={open} onClose={onClose} fullWidth>
 
       <DialogTitle>
         {product ? "Update Product" : "Create Product"}
@@ -38,7 +38,7 @@ const ProductModal = ({ open, onClose, onSubmit, product }) => {
 
         <TextField
           label="Title"
-          fullW_idth
+          fullWidth
           margin="normal"
           {...register("title", { required: true, minLength: 3 })}
         />
@@ -46,28 +46,28 @@ const ProductModal = ({ open, onClose, onSubmit, product }) => {
         <TextField
           label="Price"
           type="number"
-          fullW_idth
+          fullWidth
           margin="normal"
           {...register("price", { required: true })}
         />
 
         <TextField
           label="Category"
-          fullW_idth
+          fullWidth
           margin="normal"
           {...register("category")}
         />
 
         <TextField
           label="Image URL"
-          fullW_idth
+          fullWidth
           margin="normal"
           {...register("image")}
         />
 
         <TextField
           label="Description"
-          fullW_idth
+          fullWidth
           multiline
           rows={3}
           margin="normal"

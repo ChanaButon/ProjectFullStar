@@ -7,8 +7,8 @@ const productSchema = new mongoose.Schema({
   category: String,
   image: String,
   rating: {
-    rate: { type: Number, min: 0, max: 5 },
-    count: Number
+    rate: { type: Number, min: 0, max: 5, default: 0 },
+    count: { type: Number, default: 0 }
   }
 });
 

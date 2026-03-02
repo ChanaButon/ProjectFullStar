@@ -8,7 +8,7 @@ export const OTPInput = ({
 }) => {
   // State to store the OTP value (each digit as an array element)
   const [otp, setOtp] = useState(new Array(length).fill(""));
-  // Ref array to store references to each indiv_idual input element
+  // Ref array to store references to each individual input element
   const inputRefs = useRef([]);
 
   const handleChange = (element, index) => {
@@ -65,7 +65,7 @@ export const OTPInput = ({
           ref={(el) => (inputRefs.current[index] = el)}
           className="otp-input-box"
           style={{
-            w_idth: "40px",
+            width: "40px",
             height: "40px",
             textAlign: "center",
             margin: "0 5px",

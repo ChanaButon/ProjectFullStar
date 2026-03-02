@@ -1,23 +1,26 @@
 import { Product } from "../models/productModel.js";
 
-
+/* GET */
 export const getAllProducts = async () => {
   return await Product.find();
 };
 
-export const getProductBy_id = async (_id) => {
-  return await Product.findBy_id(_id);
+export const getProductByid = async (id) => {
+  return await Product.findById(id);
 };
 
+/* POST */
 export const createProduct = async (productData) => {
   const product = new Product(productData);
   return await product.save();
 };
 
-export const updateProductBy_id = async (_id, data) => {
-  return await Product.findBy_idAndUpdate(_id, data, { new: true });
+/* PUT */
+export const updateProductByid = async (id, data) => {
+  return await Product.findByIdAndUpdate(id, data, { new: true });
 };
 
-export const deleteProductBy_id = async (_id) => {
-  return await Product.findBy_idAndDelete(_id);
+/* DELETE */
+export const deleteProductByid = async (id) => {
+  return await Product.findByIdAndDelete(id);
 };

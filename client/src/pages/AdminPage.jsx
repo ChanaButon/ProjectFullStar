@@ -19,34 +19,34 @@ export const AdminPage = () => {
   const [open, setOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
-  const inval_idate = () =>
-    queryClient.inval_idateQueries({ queryKey: ["all-products"] });
+  const invalidate = () =>
+    queryClient.invalidateQueries({ queryKey: ["all-products"] });
 
   const createMutation = useMutation({
     mutationFn: createProduct,
     onSuccess: () => {
-      inval_idate();
+      invalidate();
       setOpen(false);
     },
   });
 
   const updateMutation = useMutation({
-    mutationFn: ({ _id, product }) => updateProduct(_id, product),
+    mutationFn: ({ id, product }) => updateProduct(id, product),
     onSuccess: () => {
-      inval_idate();
+      invalidate();
       setOpen(false);
     },
   });
 
   const deleteMutation = useMutation({
     mutationFn: deleteProduct,
-    onSuccess: inval_idate,
+    onSuccess: invalidate,
   });
 
   const handleSubmit = (data) => {
     if (selectedProduct) {
       updateMutation.mutate({
-        _id: selectedProduct.__id,
+        id: selectedProduct._id,
         product: data,
       });
     } else {
@@ -79,7 +79,7 @@ export const AdminPage = () => {
           setSelectedProduct(p);
           setOpen(true);
         }}
-        onDelete={(_id) => deleteMutation.mutate(_id)}
+        onDelete={(id) => deleteMutation.mutate(id)}
       />
 
       <ProductModal

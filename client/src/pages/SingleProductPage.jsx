@@ -28,7 +28,7 @@ export const SingleProductPage = () => {
         <img
           src={product.image}
           alt={product.title}
-          style={{ w_idth: "200px" }}
+          style={{ width: "200px" }}
         />
         {Object.entries(product).map(([key, value]) => {
           if (typeof value === "object" || key === "image") return null;

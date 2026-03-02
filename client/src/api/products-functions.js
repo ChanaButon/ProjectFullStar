@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:3001/api/products";
+const BASE_URL = "http://localhost:3000/products";
 
 export const handleProducts = async () => {
   const response = await fetch(BASE_URL);
@@ -6,12 +6,11 @@ export const handleProducts = async () => {
   return response.json();
 };
 
-export const fetchSingleProduct = async (_id) => {
-  const response = await fetch(`${BASE_URL}/${_id}`);
+export const fetchSingleProduct = async (id) => {
+  const response = await fetch(`${BASE_URL}/${id}`);
   if (!response.ok) throw new Error("Product not found");
   return response.json();
 };
-
 
 export const createProduct = async (product) => {
   const response = await fetch(BASE_URL, {
@@ -24,8 +23,8 @@ export const createProduct = async (product) => {
   return response.json();
 };
 
-export const updateProduct = async (_id, product) => {
-  const response = await fetch(`${BASE_URL}/${_id}`, {
+export const updateProduct = async (id, product) => {
+  const response = await fetch(`${BASE_URL}/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(product),
@@ -35,8 +34,8 @@ export const updateProduct = async (_id, product) => {
   return response.json();
 };
 
-export const deleteProduct = async (_id) => {
-  const response = await fetch(`${BASE_URL}/${_id}`, {
+export const deleteProduct = async (id) => {
+  const response = await fetch(`${BASE_URL}/${id}`, {
     method: "DELETE",
   });
 

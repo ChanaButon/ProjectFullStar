@@ -10,15 +10,15 @@ export const getAllUsersController = async (req, res) => {
   }
 };
 
-export const getUserBy_idController = async (req, res) => {
+export const getUserByidController = async (req, res) => {
   try {
-    const user = await userService.getUserBy_id(req.params._id);
+   const user = await userService.getUserByid(req.params.id);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
     res.status(200).json(user);
   } catch {
-    res.status(400).json({ message: "Inval_id _id" });
+    res.status(400).json({ message: "Invalid id" });
   }
 };
 
@@ -44,26 +44,26 @@ export const createManyUsersController = async (req, res) => {
 /* PUT */
 export const updateUserController = async (req, res) => {
   try {
-    const updated = await userService.updateUserBy_id(req.params._id, req.body);
+    await userService.updateUserByid(req.params.id, req.body);
     if (!updated) {
       return res.status(404).json({ message: "User not found" });
     }
     res.status(200).json(updated);
   } catch {
-    res.status(400).json({ message: "Inval_id _id" });
+    res.status(400).json({ message: "Invalid id" });
   }
 };
 
 /* DELETE */
 export const deleteUserController = async (req, res) => {
   try {
-    const deleted = await userService.deleteUserBy_id(req.params._id);
+    const deleted = await userService.deleteUserByid(req.params.id);
     if (!deleted) {
       return res.status(404).json({ message: "User not found" });
     }
     res.status(200).json(deleted);
   } catch {
-    res.status(400).json({ message: "Inval_id _id" });
+    res.status(400).json({ message: "Invalid id" });
   }
 };
 

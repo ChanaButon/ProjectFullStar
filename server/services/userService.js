@@ -5,10 +5,10 @@ export const getAllUsers = async () => {
   return await User.find();
 };
 
-export const getUserBy_id = async (_id) => {
-  return await User.findBy_id(_id);
+export const getUserByid = async (id) => {
+  return await User.findById(id);
 };
- 
+
 /* POST */
 export const createUser = async (data) => {
   return await User.create(data);
@@ -19,13 +19,13 @@ export const createManyUsers = async (users) => {
 };
 
 /* PUT */
-export const updateUserBy_id = async (_id, data) => {
-  return await User.findBy_idAndUpdate(_id, data, { new: true });
+export const updateUserByid = async (id, data) => {
+  return await User.findByIdAndUpdate(id, data, { new: true });
 };
 
 /* DELETE */
-export const deleteUserBy_id = async (_id) => {
-  return await User.findBy_idAndDelete(_id);
+export const deleteUserByid = async (id) => {
+  return await User.findByIdAndDelete(id);
 };
 
 export const deleteAllUsers = async () => {

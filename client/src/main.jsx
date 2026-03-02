@@ -1,12 +1,12 @@
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import { Router } from "./Router.jsx";
-import TanstackProv_ider from "./QueryClientProv_ider.jsx";
+import TanstackProvider from "./QueryClientProvider.jsx";
 
-const root = document.getElementBy_id("root");
+const root = document.getElementById("root");
 
 createRoot(root).render(
-  <TanstackProv_ider>
+  <TanstackProvider>
     <Router />
-  </TanstackProv_ider>,
+  </TanstackProvider>,
 );

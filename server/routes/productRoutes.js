@@ -1,7 +1,7 @@
 import express from "express";
 import {
   getAllProductsController,
-  findProductBy_idController,
+  findProductByidController,
   createProductController,
   updateProductController,
   deleteProductController
@@ -10,9 +10,9 @@ import {
 const router = express.Router();
 
 router.get("/", getAllProductsController);
-router.get("/:_id", findProductBy_idController);
+router.get("/:id", findProductByidController);
 router.post("/", createProductController);
-router.put("/:_id", updateProductController);
-router.delete("/:_id", deleteProductController);
+router.put("/:id", updateProductController);
+router.delete("/:id", deleteProductController);
 
 export default router;

@@ -29,12 +29,12 @@ const ProductTable = ({ products, onEdit, onDelete }) => {
 
         <TableBody>
           {products.map((product) => (
-            <TableRow key={product.__id}>
+            <TableRow key={product._id}>
               <TableCell>
                 <img
                   src={product.image}
                   alt={product.title}
-                  w_idth={60}
+                  width={60}
                 />
               </TableCell>
 
@@ -49,7 +49,7 @@ const ProductTable = ({ products, onEdit, onDelete }) => {
 
                 <IconButton
                   color="error"
-                  onClick={() => onDelete(product.__id)}
+                  onClick={() => onDelete(product._id)}
                 >
                   <DeleteIcon />
                 </IconButton>
